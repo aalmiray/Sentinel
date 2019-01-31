@@ -1,0 +1,61 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        // for resolving plugins
+        gradlePluginPortal()
+        // for resolving additional dependencies required by plugins
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'sentinel-parent'
+
+def includeProject = { String projectPath ->
+    String[] parts = projectPath.split('/')
+    String projectDirName = projectPath
+    String projectName = parts[-1]
+
+    File projectDir = new File(projectDirName)
+    String buildFileName = "${projectName}.gradle"
+
+    assert projectDir.isDirectory()
+    File buildFile = new File(projectDir, buildFileName)
+    if (buildFile.exists()) {
+        include projectName
+        project(":${projectName}").projectDir = projectDir
+        project(":${projectName}").buildFileName = buildFileName
+    }
+}
+
+includeProject('sentinel-core')
+includeProject('sentinel-extension/sentinel-datasource-extension')
+includeProject('sentinel-extension/sentinel-datasource-nacos')
+includeProject('sentinel-extension/sentinel-datasource-zookeeper')
+includeProject('sentinel-extension/sentinel-datasource-apollo')
+includeProject('sentinel-extension/sentinel-datasource-redis')
+includeProject('sentinel-extension/sentinel-annotation-aspectj')
+includeProject('sentinel-extension/sentinel-parameter-flow-control')
+includeProject('sentinel-transport/sentinel-transport-common')
+includeProject('sentinel-transport/sentinel-transport-simple-http')
+includeProject('sentinel-transport/sentinel-transport-netty-http')
+includeProject('sentinel-adapter/sentinel-web-servlet')
+includeProject('sentinel-adapter/sentinel-dubbo-adapter')
+includeProject('sentinel-adapter/sentinel-grpc-adapter')
+includeProject('sentinel-adapter/sentinel-zuul-adapter')
+includeProject('sentinel-dashboard')
+includeProject('sentinel-demo/sentinel-demo-basic')
+includeProject('sentinel-demo/sentinel-demo-dynamic-file-rule')
+includeProject('sentinel-demo/sentinel-demo-rocketmq')
+includeProject('sentinel-demo/sentinel-demo-dubbo')
+includeProject('sentinel-demo/sentinel-demo-nacos-datasource')
+includeProject('sentinel-demo/sentinel-demo-zookeeper-datasource')
+includeProject('sentinel-demo/sentinel-demo-apollo-datasource')
+includeProject('sentinel-demo/sentinel-demo-annotation-spring-aop')
+includeProject('sentinel-demo/sentinel-demo-parameter-flow-control')
+includeProject('sentinel-demo/sentinel-demo-slot-chain-spi')
+includeProject('sentinel-demo/sentinel-demo-cluster/sentinel-demo-cluster-embedded')
+includeProject('sentinel-demo/sentinel-demo-cluster/sentinel-demo-cluster-server-alone')
+includeProject('sentinel-benchmark')
+includeProject('sentinel-cluster/sentinel-cluster-client-default')
+includeProject('sentinel-cluster/sentinel-cluster-server-default')
+includeProject('sentinel-cluster/sentinel-cluster-common-default')

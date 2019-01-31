@@ -1,0 +1,11 @@
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+    compile project(':sentinel-core')
+    compile "org.springframework:spring-context:$springVersion"
+    compile "com.alibaba:dubbo:$dubboVersion"
+    compile project(':sentinel-dubbo-adapter')
+    compile project(':sentinel-transport-simple-http')
+    compile "ch.qos.logback:logback-classic:$logbackVersion"
+}

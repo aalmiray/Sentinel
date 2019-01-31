@@ -1,0 +1,11 @@
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+    compile project(':sentinel-datasource-extension')
+    compile "io.lettuce:lettuce-core:$lettuceVersion"
+    testCompile "junit:junit:$junitVersion"
+    testCompile "com.alibaba:fastjson:$fastjsonVersion"
+    testCompile "ai.grakn:redis-mock:$redisMockVersion"
+    testCompile "org.awaitility:awaitility:$awaitilityVersion"
+}

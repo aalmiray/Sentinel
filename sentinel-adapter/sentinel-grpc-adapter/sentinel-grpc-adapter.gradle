@@ -1,0 +1,44 @@
+plugins {
+    id 'com.google.protobuf' version '0.8.7'
+}
+
+dependencies {
+    compile project(':sentinel-core')
+    compile "javax.annotation:javax.annotation-api:$javaxAnnotationVersion"
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "com.alibaba:fastjson:$fastjsonVersion"
+    compileOnly "io.grpc:grpc-netty:$grpcVersion"
+    compileOnly "io.grpc:grpc-protobuf:$grpcVersion"
+    compileOnly "io.grpc:grpc-stub:$grpcVersion"
+    testCompile "io.grpc:grpc-netty:$grpcVersion"
+    testCompile "io.grpc:grpc-protobuf:$grpcVersion"
+    testCompile "io.grpc:grpc-stub:$grpcVersion"
+}
+
+protobuf {
+    generatedFilesBaseDir = file("${buildDir}/generated")
+
+    protoc {
+        artifact = "com.google.protobuf:protoc:$protobufVersion"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:$grpcVersion"
+        }
+    }
+    generateProtoTasks {
+        ofSourceSet('test')*.plugins {->
+            grpc { }
+        }
+    }
+}
+
+/*
+idea {
+    module {
+        generatedSourceDirs += file("${buildDir}/generated/main/java")
+        generatedSourceDirs += file("${buildDir}/generated/main/grpc")
+    }
+}
+*/

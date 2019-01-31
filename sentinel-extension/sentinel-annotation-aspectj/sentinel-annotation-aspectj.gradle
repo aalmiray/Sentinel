@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':sentinel-core')
+    compile "org.aspectj:aspectjrt:$aspectjVersion"
+    compile "org.aspectj:aspectjweaver:$aspectjVersion"
+}

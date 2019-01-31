@@ -1,0 +1,29 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '4.0.4'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+    compile project(':sentinel-core')
+    compile "org.openjdk.jmh:jmh-core:$jmhVersion"
+    compileOnly         "org.openjdk.jmh:jmh-generator-annprocess:$jmhVersion"
+    annotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:$jmhVersion"
+}
+
+description = 'Sentinel JMH benchmark'
+
+shadowJar {
+    classifier = ''
+
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+
+    manifest {
+        attributes 'Main-Class': 'org.openjdk.jmh.Main'
+    }
+}
+
+jar.finalizedBy shadowJar

@@ -1,0 +1,16 @@
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+dependencies {
+    compile project(':sentinel-datasource-extension')
+    compile "org.apache.zookeeper:zookeeper:$zookepperVersion"
+    compile("org.apache.curator:curator-recipes:$curatorRecipesVersion") {
+        exclude group: 'org.apache.zookeeper', module: 'zookeeper'
+    }
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.awaitility:awaitility:$awaitilityVersion"
+    testCompile("org.apache.curator:curator-test:$curatorTestVersion") {
+        exclude group: 'org.apache.zookeeper', module: 'zookeeper'
+    }
+    testCompile "com.alibaba:fastjson:$fastjsonVersion"
+}
