@@ -1,0 +1,4 @@
+dependencies {
+    compile project(':sentinel-datasource-extension')
+    compile "com.alibaba.nacos:nacos-client:$nacosVersion"
+}

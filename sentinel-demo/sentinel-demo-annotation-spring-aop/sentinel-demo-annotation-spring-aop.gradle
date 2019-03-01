@@ -1,0 +1,10 @@
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+    compile project(':sentinel-core')
+    compile project(':sentinel-annotation-aspectj')
+    compile project(':sentinel-transport-simple-http')
+    compile "org.springframework.boot:spring-boot-starter-aop:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+}

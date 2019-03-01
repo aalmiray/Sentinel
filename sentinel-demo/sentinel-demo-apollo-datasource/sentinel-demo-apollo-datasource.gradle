@@ -1,0 +1,9 @@
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+    compile project(':sentinel-core')
+    compile project(':sentinel-datasource-apollo')
+    compile "com.alibaba:fastjson:$fastjsonVersion"
+    compile "org.apache.logging.log4j:log4j-slf4j-impl:$log4jSlf4jImplVersion"
+}

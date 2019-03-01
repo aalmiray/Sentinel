@@ -1,0 +1,13 @@
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+    compile project(':sentinel-core')
+    compile project(':sentinel-datasource-extension')
+    compile project(':sentinel-datasource-zookeeper')
+    compile "com.alibaba:fastjson:$fastjsonVersion"
+    compile "org.apache.zookeeper:zookeeper:$zookepperVersion"
+    compile("org.apache.curator:curator-recipes:$curatorRecipesVersion") {
+        exclude group: 'org.apache.zookeeper', module: 'zookeeper'
+    }
+}

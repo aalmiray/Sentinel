@@ -1,0 +1,9 @@
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+    compile project(':sentinel-core')
+    compile project(':sentinel-datasource-extension')
+    compile project(':sentinel-transport-simple-http')
+    compile "com.alibaba:fastjson:$fastjsonVersion"
+}

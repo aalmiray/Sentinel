@@ -1,0 +1,36 @@
+plugins {
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+    compile project(':sentinel-core')
+    compile project(':sentinel-web-servlet')
+    compile project(':sentinel-transport-simple-http')
+    compile project(':sentinel-parameter-flow-control')
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-logging:$springBootVersion"
+    compile "log4j:log4j:$log4jVersion"
+    compile "commons-lang:commons-lang:$commonsLangVersion"
+    compile "org.apache.httpcomponents:httpclient:$httpComponentsVersion"
+    compile "org.apache.httpcomponents:httpcore:$httpComponentsVersion"
+    compile "org.apache.httpcomponents:httpasyncclient:$httpAsyncClientVersion"
+    compile "org.apache.httpcomponents:httpcore-nio:$httpCoreNioVersion"
+    compile "com.alibaba:fastjson:$fastjsonVersion"
+    testCompile project(':sentinel-datasource-nacos')
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+}
+
+springBoot {
+    mainClassName = 'com.alibaba.csp.sentinel.dashboard.DashboardApplication'
+}
+
+/*
+config {
+    jar { enabled = false }
+}
+ */

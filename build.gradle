@@ -1,0 +1,150 @@
+plugins {
+    id 'com.gradle.build-scan'      version '2.1'
+    id 'org.kordamp.gradle.project' version '0.14.0'
+    id 'com.adarshr.test-logger'    version '1.6.0' apply false
+}
+
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
+
+apply plugin: 'org.kordamp.gradle.bom'
+
+config {
+    release = (rootProject.findProperty('release') ?: false).toBoolean()
+
+    info {
+        name          = rootProject.name
+        vendor        = 'Alibaba'
+        description   = 'A lightweight powerful flow control component enabling reliability and monitoring for microservices'
+        inceptionYear = '1999'
+        tags          = ['project', 'monitoring', 'microservices']
+
+        organization {
+            name = 'Alibaba Group'
+            url  = 'https://github.com/alibaba'
+        }
+
+        links {
+            website      = 'https://github.com/alibaba/Sentinel'
+            issueTracker = 'https://github.com/alibaba/Sentinel/issues'
+            scm          = 'https://github.com/alibaba/Sentinel.git'
+        }
+
+        scm {
+            url                 = 'https://github.com/alibaba/Sentinel'
+            connection          = 'scm:git:https://github.com/alibaba/Sentinel.git'
+            developerConnection = 'scm:git:https://github.com/alibaba/Sentinel.git'
+        }
+
+        specification {
+            enabled = false
+        }
+
+        implementation {
+            title = 'Sentinel'
+        }
+
+        people {
+            person {
+                id    = 'sentinel'
+                name  = 'The Sentinel Project Contributors'
+                email = 'sentinel-dev@linux.alibaba.com'
+                url   = 'https://github.com/alibaba/Sentinel'
+                roles = ['developer']
+            }
+        }
+
+        repositories {
+            repository {
+                name = 'releaseRepo'
+                url  = "${project.rootProject.buildDir}/repos/releases"
+            }
+            repository {
+                name = 'oss-release'
+                url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            }
+            repository {
+                name = 'oss-snapshot'
+                url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+            }
+        }
+    }
+
+    license {
+        licenses {
+            license {
+                id = 'Apache-2.0'
+            }
+        }
+    }
+
+    publishing {
+        enabled            = true
+        signing            = true
+        releasesRepository = 'releaseRepo'
+        pom {
+            parent = 'sentinel-parent'
+        }
+    }
+
+    bom {
+        exclude('sentinel-dashboard')
+        exclude('sentinel-demo-basic')
+        exclude('sentinel-demo-dynamic-file-rule')
+        exclude('sentinel-demo-rocketmq')
+        exclude('sentinel-demo-dubbo')
+        exclude('sentinel-demo-nacos-datasource')
+        exclude('sentinel-demo-zookeeper-datasource')
+        exclude('sentinel-demo-apollo-datasource')
+        exclude('sentinel-demo-annotation-spring-aop')
+        exclude('sentinel-demo-parameter-flow-control')
+        exclude('sentinel-demo-slot-chain-spi')
+        exclude('sentinel-demo-cluster-embedded')
+        exclude('sentinel-demo-cluster-server-alone')
+        exclude('sentinel-benchmark')
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    jacoco {
+        toolVersion = jacocoVersion
+    }
+}
+
+subprojects { subproject ->
+    apply plugin: 'java'
+    apply plugin: 'com.adarshr.test-logger'
+
+    config {
+        info {
+            name        = subproject.name
+            description = subproject.name
+        }
+
+        jacoco {
+            enabled = subproject.file('src/test').exists()
+        }
+    }
+
+    subproject.sourceCompatibility = '1.6'
+    subproject.targetCompatibility = '1.6'
+
+    subproject.tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    license {
+        ignoreFailures = true
+    }
+
+    testlogger {
+        // theme 'standard-parallel'
+        slowThreshold 5000
+    }
+}

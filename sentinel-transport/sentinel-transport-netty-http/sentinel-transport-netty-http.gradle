@@ -1,0 +1,9 @@
+dependencies {
+    compile project(':sentinel-transport-common')
+    compile "io.netty:netty-all:$nettyVersion"
+    compile "com.alibaba:fastjson:$fastjsonVersion"
+    compile "org.apache.httpcomponents:httpclient:$httpClientVersion"
+    compile "org.apache.httpcomponents:httpcore:$httpComponentsVersion"
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+}

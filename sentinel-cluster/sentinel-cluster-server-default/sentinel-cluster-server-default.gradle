@@ -1,0 +1,20 @@
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+dependencies {
+    compile project(':sentinel-core')
+    compile project(':sentinel-cluster-common-default')
+    compile project(':sentinel-parameter-flow-control')
+    compile "io.netty:netty-handler:$nettyVersion"
+    testCompile project(':sentinel-datasource-nacos')
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    compileOnly project(':sentinel-transport-common')
+}
+
+config {
+    jacoco {
+        // TODO: remove this block once there are actual tests in place
+        enabled = false
+    }
+}
