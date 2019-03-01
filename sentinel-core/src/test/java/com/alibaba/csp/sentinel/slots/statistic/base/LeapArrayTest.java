@@ -18,12 +18,14 @@ package com.alibaba.csp.sentinel.slots.statistic.base;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
+import org.junit.Ignore;
 
 import static org.junit.Assert.*;
 
 /**
  * @author Eric Zhao
  */
+@Ignore("non-deterministic")
 public class LeapArrayTest {
 
     @Test
